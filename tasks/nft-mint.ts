@@ -2,8 +2,8 @@ import { task } from 'hardhat/config'
 
 import { types } from '@layerzerolabs/devtools-evm-hardhat'
 
-task('onft:mint', 'Mints new tokens via the MyOFT contract')
-    .addParam('to', 'Address to receive minted tokens', undefined, types.string)
+task('onft:mint', 'Mints new NFTs')
+    .addParam('to', 'Address to receive minted token', undefined, types.string)
     .setAction(async (taskArgs, { ethers, deployments }) => {
         const { to, amount } = taskArgs
         // Fetch the deployment info
@@ -16,7 +16,6 @@ task('onft:mint', 'Mints new tokens via the MyOFT contract')
         // Call mint()
         const tx = await onft.mint(to)
         console.log(`🚀 Mint transaction sent: ${tx.hash}`)
-        const xd = await tx.wait()
-        console.log({xd})
-        console.log(`✅ Successfully minted ${amount} token(s) to ${to}`)
+        await tx.wait()
+        console.log(`✅ Successfully minted NF token to ${to}`)
     })

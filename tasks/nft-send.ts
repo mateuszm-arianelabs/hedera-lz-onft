@@ -12,13 +12,13 @@ interface SendParam {
 }
 
 task('onft:sendFromFuji', 'Sends an NFT from chain A to chain B using MyONFTAdapter')
-    .addParam('eid', 'Destination chain endpoint ID')
     .addParam('recipient', 'Recipient on the destination chain')
     .addParam('tokenid', 'Token ID to send')
     .setAction(async (taskArgs, { ethers, deployments }) => {
-        const { eid, recipient, tokenid } = taskArgs
+        const { recipient, tokenid } = taskArgs
         const [signer] = await ethers.getSigners()
         const onftDeployment = await deployments.get('MyONFT721')
+        const eid = 40285
 
         // Get adapter contract instance
         const onft = new ethers.Contract(onftDeployment.address, onftDeployment.abi, signer)
@@ -51,13 +51,13 @@ task('onft:sendFromFuji', 'Sends an NFT from chain A to chain B using MyONFTAdap
     })
 
 task('onft:sendFromHedera', 'Sends an NFT from chain A to chain B using MyONFTAdapter')
-    .addParam('eid', 'Destination chain endpoint ID')
     .addParam('recipient', 'Recipient on the destination chain')
     .addParam('tokenid', 'Token ID to send')
     .setAction(async (taskArgs, { ethers, deployments }) => {
-        const { eid, recipient, tokenid } = taskArgs
+        const { recipient, tokenid } = taskArgs
         const [signer] = await ethers.getSigners()
         const onftDeployment = await deployments.get('MyONFT721')
+        const eid = 40106;
 
         // Get adapter contract instance
         const onft = new ethers.Contract(onftDeployment.address, onftDeployment.abi, signer)
